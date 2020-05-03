@@ -36,13 +36,12 @@ USER cryptpad
 # Create directory for data
 RUN mkdir /cryptpad/data
 
-# Copy customizations into the container
-COPY --chown=cryptpad customize /cryptpad/customize
 
 # Set workdir to cryptpad
 WORKDIR /cryptpad
 
 # Volumes for data persistence
+VOLUME /cryptpad/customize
 VOLUME /cryptpad/datastore
 VOLUME /cryptpad/data
 VOLUME /cryptpad/block
