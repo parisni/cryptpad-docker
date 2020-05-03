@@ -1,5 +1,5 @@
 # Multistage build to reduce image size and increase security
-FROM node:12-stretch-slim AS build
+FROM node:12-buster-slim AS build
 
 # Install requirements to clone repository and install deps
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yq git
@@ -23,7 +23,7 @@ RUN npm install --production \
     && bower install --allow-root
 
 # Create actual cryptpad image
-FROM node:12-stretch-slim
+FROM node:12-buster-slim
 
 # Create user and group for cryptpad so it does not run as root
 RUN groupadd cryptpad -g 4001
@@ -42,8 +42,14 @@ COPY --chown=cryptpad customize /cryptpad/customize
 # Set workdir to cryptpad
 WORKDIR /cryptpad
 
-# Port
-EXPOSE 3000
+# Volumes for data persistence
+VOLUME /cryptpad/datastore
+VOLUME /cryptpad/data
+VOLUME /cryptpad/block
+VOLUME /cryptpad/blob
+
+# Ports
+EXPOSE 3000 3001
 
 # Run cryptpad on startup
 CMD ["server.js"]
