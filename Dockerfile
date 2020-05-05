@@ -5,17 +5,12 @@ FROM node:12-buster-slim AS build
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yq git
 RUN npm install -g bower
 
-# Allow to create docker image from different repository or branch
-ARG REPO=https://github.com/xwiki-labs/cryptpad.git
-ARG BRANCH=master
-
 # Create folder for cryptpad
 RUN mkdir /cryptpad
 WORKDIR /cryptpad
 
-# Get cryptpad from upstream
-RUN git clone --depth 1 --branch ${BRANCH} --single-branch ${REPO} .\
-    && rm -rf .git
+# Get cryptpad from repository submodule
+COPY cryptpad /cryptpad
 
 # Install dependencies
 RUN npm install --production \

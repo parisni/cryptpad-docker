@@ -1,0 +1,8 @@
+.dockerignore
+.git
+.gitignore
+customize
+docker-compose.yml
+Dockerfile
+cryptpad/.git
+.gitmodules
