@@ -1,8 +1,9 @@
 .dockerignore
 .git
 .gitignore
+.gitmodules
+cryptpad/.git
 customize
+data
 docker-compose.yml
 Dockerfile
-cryptpad/.git
-.gitmodules

@@ -36,11 +36,11 @@ RUN mkdir /cryptpad/data
 WORKDIR /cryptpad
 
 # Volumes for data persistence
-VOLUME /cryptpad/customize
-VOLUME /cryptpad/datastore
-VOLUME /cryptpad/data
-VOLUME /cryptpad/block
 VOLUME /cryptpad/blob
+VOLUME /cryptpad/block
+VOLUME /cryptpad/customize
+VOLUME /cryptpad/data
+VOLUME /cryptpad/datastore
 
 # Ports
 EXPOSE 3000 3001
