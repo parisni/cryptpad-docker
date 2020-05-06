@@ -15,7 +15,6 @@ Please see the [migration guide](MIGRATION.md) for further information on switch
 * Mounted files and folders have to be owned by userid 4001. It is possible you have to run 
 `sudo chown -R 4001:4001 filename`
 
-
 ### Dockerfile
 
 * Run: `docker run -d -p 3000:3000 -p 3001:3001 promasu/cryptpad`
