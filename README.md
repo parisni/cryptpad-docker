@@ -7,4 +7,22 @@ The officially recommended deployment method is to use the `example.nginx.conf` 
 Docker images and their supporting configuration files are provided as a community effort by those using them, with support provided by the core development team on a _best-effort_ basis. Keep in mind that the core team neither uses nor tests Docker images, so your results may vary.
 
 ## Migration
-Please see the [migration guide](https://github.com/xwiki-labs/cryptpad-docker/blob/master/MIGRATION.md) for further information on switching to this repository.
+Please see the [migration guide](MIGRATION.md) for further information on switching to this repository.
+
+## Usage
+
+### General notices
+* Mounted files and folders have to be owned by userid 4001. It is possible you have to run 
+`sudo chown -R 4001:4001 filename`
+
+
+### Dockerfile
+
+* Run: `docker run -d -p 3000:3000 -p 3001:3001 promasu/cryptpad`
+* Run with customizations: `docker run -d -p 3000:3000 -p 3001:3001 -v customize:/cryptpad/customize promasu/cryptpad`
+* Run with configuration: `docker run -d -p 3000:3000 -p 3001:3001 -v config.js:/cryptpad/config/config.js promasu/cryptpad`
+
+### Docker-compose
+
+* Run: `docker-compose up`
+* Run with traefik2 labels: `docker-compose -f docker-compose.yml -f traefik2.yml up`
