@@ -30,12 +30,11 @@ RUN useradd cryptpad -u 4001 -g 4001 -d /cryptpad
 COPY --from=build --chown=cryptpad /cryptpad /cryptpad
 USER cryptpad
 
-# Create directory for data
-RUN mkdir /cryptpad/data
-
-
 # Set workdir to cryptpad
 WORKDIR /cryptpad
+
+# Create directories
+RUN mkdir blob block customize data datastore
 
 # Volumes for data persistence
 VOLUME /cryptpad/blob
