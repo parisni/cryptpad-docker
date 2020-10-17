@@ -12,7 +12,7 @@ WORKDIR /cryptpad
 # Get cryptpad from repository submodule
 COPY cryptpad /cryptpad
 
-RUN sed -i "s/\/\/httpAddress: \x27::\x27/httpAddress: \x270.0.0.0\x27/" /cryptpad/config/config.example.js
+RUN sed -i "s@//httpAddress: '::'@httpAddress: '0.0.0.0'@" /cryptpad/config/config.example.js
 
 # Install dependencies
 RUN npm install --production \
