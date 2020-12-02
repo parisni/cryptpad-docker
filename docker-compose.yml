@@ -1,18 +1,25 @@
 ---
-version: '2'
+version: '3.8'
 
 services:
   cryptpad:
     image: "promasu/cryptpad:latest"
     hostname: cryptpad
 
+    environment:
+      - CPAD_MAIN_DOMAIN=example.com
+      - CPAD_SANDBOX_DOMAIN=sandbox.example.com
+      # Traefik can't use HTTP2 to communicate with cryptpat_websocket
+      # A workaroung is disabling HTTP2 in Nginx
+      - CPAD_HTTP2_DISABLE=true
+
     volumes:
       - ./data/blob:/cryptpad/blob
       - ./data/block:/cryptpad/block
       - ./customize:/cryptpad/customize
-      - ./data/config.js:/cryptpad/config/config.js
       - ./data/data:/cryptpad/data
       - ./data/files:/cryptpad/datastore
+      - ./data/config.js:/cryptpad/config/config.js
 
     ports:
       - "3000:3000"
