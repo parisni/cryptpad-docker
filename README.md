@@ -134,3 +134,11 @@ A workaround is to disable HTTP2 by setting the `CPAD_HTTP2_DISABLE` environment
 
 ##### Nginx version not working with some browser configurations  
 See [https://github.com/xwiki-labs/cryptpad/issues/633]  
+
+# License
+
+![AGPL logo](https://www.gnu.org/graphics/agplv3-155x51.png "GNU Affero General Public License")
+
+This software is and will always be available under the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
