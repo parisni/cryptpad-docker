@@ -13,6 +13,7 @@ WORKDIR /cryptpad
 COPY cryptpad /cryptpad
 
 RUN sed -i "s@//httpAddress: '::'@httpAddress: '0.0.0.0'@" /cryptpad/config/config.example.js
+RUN sed -i "s@installMethod: 'unspecified'@installMethod: 'docker'@" /cryptpad/config/config.example.js
 
 # Install dependencies
 RUN npm install --production \
