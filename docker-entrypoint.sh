@@ -71,7 +71,7 @@ if [ ! -f "${CPAD_NGINX_CPAD_CONF:=/etc/nginx/conf.d/cryptpad.conf}" ]; then
   # Change nginx document root
   sed -i "s@\(root\) */.*\([^;]\)@\1 $CPAD_HOME@" $CPAD_NGINX_CPAD_CONF
 
-  # Wether or not Nginx should terminate TLS (defaults to true)
+  # Whether or not Nginx should terminate TLS (defaults to true)
   if [ -n "$CPAD_TLS_CERT" \
     -a -n "$CPAD_TLS_KEY" ]; then
 
