@@ -1,6 +1,6 @@
 # Multistage build to reduce image size and increase security
 
-FROM node:12-alpine AS build
+FROM node:16-alpine AS build
 
 # Install requirements to clone repository and install deps
 RUN apk add --no-cache git \
@@ -17,7 +17,7 @@ RUN npm install --production \
     && bower install --allow-root
 
 # Create actual cryptpad image
-FROM node:12-alpine
+FROM node:16-alpine
 
 RUN set -x \
     # Create users and groups for nginx and cryptpad
