@@ -1,6 +1,6 @@
 # Multistage build to reduce image size and increase security
 
-FROM node:12-buster-slim AS build
+FROM node:16-buster-slim AS build
 
 # Install requirements to clone repository and install deps
 RUN apt-get update \
@@ -18,7 +18,7 @@ RUN npm install --production \
     && bower install --allow-root
 
 # Create actual cryptpad image
-FROM node:12-buster-slim
+FROM node:16-buster-slim
 
 RUN set -x \
     # Create users and groups for cryptpad
