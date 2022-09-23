@@ -160,4 +160,7 @@ if [ ! -f "${CPAD_NGINX_CPAD_CONF:=/etc/nginx/conf.d/cryptpad.conf}" ]; then
 
 fi
 
+cd $CPAD_HOME
+npm run build
+
 exec "$@"
