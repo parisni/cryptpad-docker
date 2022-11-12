@@ -1,0 +1,28 @@
+---
+version: '3.8'
+
+services:
+  cryptpad:
+    image: interhop/cryptpad:${CRYPTPAD_VERSION}
+    hostname: cryptpad
+
+    env_file: .env
+
+    volumes:
+      - ${DATA_PATH}/data/blob:/cryptpad/blob
+      - ${DATA_PATH}/data/block:/cryptpad/block
+      - ${DATA_PATH}/customize:/cryptpad/customize
+      - ${DATA_PATH}/data/data:/cryptpad/data
+      - ${DATA_PATH}/data/files:/cryptpad/datastore
+      - ${DATA_PATH}/data/config.js:/cryptpad/config/config.js
+
+    ports:
+      - ${HTTP_PORT}:80
+
+    expose:
+      - ${HTTP_PORT}
+
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
