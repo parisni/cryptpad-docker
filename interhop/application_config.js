@@ -214,10 +214,10 @@ define(function() {
 
     // Prevent anonymous users from storing pads in their drive
     // NOTE: this is only enforced client-side as the server does not distinguish between users drives and pads
-    AppConfig.disableAnonymousStore = false;
+    AppConfig.disableAnonymousStore = true;
     // Prevent anonymous users from creating new pads (they can still access and edit existing ones)
     // NOTE: this is only enforced client-side and will not prevent malicious clients from storing data
-    AppConfig.disableAnonymousPadCreation = false;
+    AppConfig.disableAnonymousPadCreation = true;
 
     // Hide the usage bar in settings and drive
     //AppConfig.hideUsageBar = true;
