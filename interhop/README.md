@@ -4,48 +4,46 @@
 
 ```shell
 git clone git@framagit.org:interhop/hds/cryptpad-docker.git
-# update cryptpad source
-cd cryptpad-docker
 ```
 
 ## Build the image
 
 ```shell
-git submodule update --init
-cd cryptpad
-git checkout 5.1.0
-# now build image
-cd ..
-docker build -t interhop/cryptpad:5.1.0 -f Dockerfile-nginx-alpine . 
+# update cryptpad source
+cd cryptpad-docker
+docker build -t interhop/cryptpad:latest -f Dockerfile-nginx-alpine . 
 ```
 
 ## Edit environment variables
 
 ```shell
 cd interhop
-vim .env
-# modify the values :
+cp env-example env-prod
+# MODIFY the values :
 CPAD_MAIN_DOMAIN 
 CPAD_SANDBOX_DOMAIN
 DATA_PATH # where the data will be persisted
 CPAD_TRUSTED_PROXY # the ip cidr of the proxy
 ```
 
-
 ## Copy configs
 
 ```shell
-mkdir -p <DATA_PATH>
-cp application_config.js <DATA_PATH>/customize/
+mkdir -p <DATA_PATH>/data/customize/
+cp application_config.js <DATA_PATH>/data/customize/
 cp config.js <DATA_PATH>/data/
+# replace example.org / sandbox.example.org in both files
 chown -R 4001:4001 <DATA_PATH>
 ```
 
-
-
 ##  Start up cryptpad
 
+The owner has to be changed after first startup:
+
 ```shell
+docker-compose up -d
+docker-compose down
+chown -R 4001:4001 <DATA_PATH>
 docker-compose up -d
 ```
 
@@ -60,12 +58,9 @@ docker-compose up -d
 
 # Instruction to upgrade
 
-```
+```shell
 git pull
-git submodule update --init
+docker build -t interhop/cryptpad:latest -f Dockerfile-nginx-alpine . 
+docker-compose down
+docker compose --env-file env-prod up -d
 ```
-
-- `build the image` with the new tag (see above)
-- edit the version in `.env`
-- run `docker compose down`
-- run `docker compose up -d`

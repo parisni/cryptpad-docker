@@ -3,11 +3,18 @@ version: '3.8'
 
 services:
   cryptpad:
-    image: interhop/cryptpad:${CRYPTPAD_VERSION}
+    image: interhop/cryptpad:latest
     restart: unless-stopped
     hostname: cryptpad
 
-    env_file: .env
+    environment:
+      - CPAD_MAIN_DOMAIN=${CPAD_MAIN_DOMAIN}
+      - CPAD_SANDBOX_DOMAIN=${CPAD_SANDBOX_DOMAIN}
+      - DATA_PATH=${DATA_PATH}
+      - HTTP_PORT=${HTTP_PORT}
+      - CPAD_TRUSTED_PROXY=${CPAD_TRUSTED_PROXY}
+      - CPAD_HTTP2_DISABLE=true
+      - CPAD_REALIP_RECURSIVE=on
 
     volumes:
       - ${DATA_PATH}/data/blob:/cryptpad/blob
