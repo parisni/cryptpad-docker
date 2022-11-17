@@ -174,7 +174,7 @@ define(function() {
         users.
     */
     AppConfig.loginSalt = '';
-    AppConfig.minimumPasswordLength = 8;
+    AppConfig.minimumPasswordLength = 20;
 
     // Amount of time (ms) before aborting the session when the algorithm cannot synchronize the pad
     AppConfig.badStateTimeout = 30000;

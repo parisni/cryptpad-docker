@@ -31,8 +31,9 @@ CPAD_TRUSTED_PROXY # the ip cidr of the proxy
 ```shell
 mkdir -p <DATA_PATH>/data/customize/
 cp application_config.js <DATA_PATH>/data/customize/
+# put a random value for loginsalt AppConfig.loginSalt = '';
 cp config.js <DATA_PATH>/data/
-# replace example.org / sandbox.example.org in both files
+# replace example.org / sandbox.example.org in both files with real https values
 chown -R 4001:4001 <DATA_PATH>
 ```
 
@@ -41,20 +42,19 @@ chown -R 4001:4001 <DATA_PATH>
 The owner has to be changed after first startup:
 
 ```shell
-docker-compose up -d
+docker compose --env-file env-prod up -d
 docker-compose down
 chown -R 4001:4001 <DATA_PATH>
-docker-compose up -d
+docker compose --env-file env-prod up -d
 ```
 
 ## On the proxy server
 
 - copy `nginx-cryptpad-reverse-proxy.conf` in site-available and link it to site-enabled
-- edit with the ip of the application server
+- edit with the ip/port of the application server
 - run `certbot --nginx -d example.org -d sandbox.example.org`
 - `nginx -t`
 - `systemctl reload nginx`
-
 
 # Instruction to upgrade
 
