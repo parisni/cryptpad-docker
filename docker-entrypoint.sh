@@ -163,9 +163,4 @@ fi
 cd $CPAD_HOME
 npm run build
 
-# Should Open Graph files be generated
-if [ "${CPAD_OPENGRAPH:-true}" != "false" ]; then
-    npm run make-opengraph
-fi
-
 exec "$@"
