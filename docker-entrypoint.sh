@@ -106,15 +106,17 @@ if [ ! -f "${CPAD_NGINX_CPAD_CONF:=/etc/nginx/conf.d/cryptpad.conf}" ]; then
     # Make Nginx listen on 80 in plaintext
     # and comment out all ssl related options
     sed -i  -e "s@\(^.*\) \+443 ssl\(.*$\)@\1 80\2@" \
-            -e "s@[^#]ssl_@ #ssl_@g" $CPAD_NGINX_CPAD_CONF
+            -e 's/^[^#]*ssl/#&/' \
+            -e 's/^[^#]*letsencrypt/#&/' \
+	    $CPAD_NGINX_CPAD_CONF
   fi
 
   # Should Nginx use http_realip_module
   if [ -n "${CPAD_TRUSTED_PROXY:=}" ]; then
     # Set trusted proxy
-    sed -i  -e "/listen/ G" \
-    -e "/listen/ a \   \ # Set trusted proxy and header containing real client IP" \
-    -e "/listen/ a \   \ set_real_ip_from  $CPAD_TRUSTED_PROXY;" $CPAD_NGINX_CPAD_CONF
+    sed -i  -e "/listen 80/ G" \
+    -e "/listen 80/ a \   \ # Set trusted proxy and header containing real client IP" \
+    -e "/listen 80/ a \   \ set_real_ip_from  $CPAD_TRUSTED_PROXY;" $CPAD_NGINX_CPAD_CONF
 
     # Set header to get real client IP from
     if [ -n "${CPAD_REALIP_HEADER:-}" ]; then
